@@ -86,6 +86,7 @@ __export(csv_to_prismadb_exports, {
   Revanimated: () => Revanimated,
   SDOutpaint: () => SDOutpaint,
   SDXL: () => SDXL,
+  FluxRealismLora: () => FluxRealismLora,
   Samaritan: () => Samaritan,
   SciFi: () => SciFi,
   SegmentAnything: () => SegmentAnything,
@@ -125,6 +126,44 @@ var SDXL = class {
         base64: data.base64 || false
       };
       return (0, import_axios.default)({
+        url: this.url,
+        data: JSON.stringify(data),
+        method: "post",
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+          "x-api-key": `${this.apiKey}`
+        }
+      });
+    });
+  }
+};
+
+// src/FluxRealismLora.ts
+var axiosForFlux = __toESM(require("axios"));
+var FluxRealismLora = class {
+  constructor(apiKey = null) {
+    this.url = "https://api.segmind.com/v1/flux-realism-lora";
+    this.apiKey = apiKey;
+  }
+  generate(data) {
+    return __async(this, null, function* () {
+      if (this.apiKey === null)
+        throw new Error("Not authenticated. Please add API Key.");
+      if (data.prompt === "")
+        throw new Error("Please enter a prompt");
+        data = {
+        prompt: data.prompt,
+        steps: data.steps,
+        seed: data.seed,
+        scheduler: data.scheduler,
+        sampler_name: data.sampler_name,
+        aspect_ration: data.aspect_ration,
+        upscale_value: data.upscale_value,
+        lora_strength: data.lora_strength,
+        upscale: data.upscale
+      }
+      return (0, axiosForFlux.default)({
         url: this.url,
         data: JSON.stringify(data),
         method: "post",
@@ -1816,6 +1855,7 @@ var Word2Img = class {
   Revanimated,
   SDOutpaint,
   SDXL,
+  FluxRealismLora,
   Samaritan,
   SciFi,
   SegmentAnything,
