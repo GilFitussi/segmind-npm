@@ -40,4 +40,4 @@ export { SegmentAnything, SegmentAnythingType } from '@/SegmentAnything';
 export { SmallSD, SmallSDType } from '@/SmallSD';
 export { TinySD, TinySDType } from '@/TinySD';
 export { Word2Img, Word2ImgType } from '@/Word2Img';
-
+export { FluxRealismLora } from '@/FluxRealismLora';
