@@ -23,6 +23,25 @@ declare class SDXL {
     generate(data: SDXLType): Promise<axios.AxiosResponse<any, any>>;
 }
 
+type FluxRealismLoraType = {
+    prompt: string,
+    steps?: number | 20,
+    seed?: number | null,
+    scheduler?: string,
+    sampler_name?: string | 'euler',
+    aspect_ration?: string | '2:3',
+    upscale_value?: number | 20
+    lora_strength?: number | 0.8
+    upscale?: boolean | true
+}
+
+declare class FluxRealismLora {
+    private url;
+    private apiKey;
+    constructor(apiKey?: string | null);
+    generate(data: FluxRealismLoraType): Promise<axios.AxiosResponse<any, any>>;
+}
+
 type Flat2DType = {
     prompt: string;
     negativePrompt?: string;
